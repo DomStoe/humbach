@@ -1,0 +1,38 @@
+//
+//  ContentView.swift
+//  Humbach1
+//
+//  Created by Dilex on 26.02.23.
+//
+
+import SwiftUI
+import WebKit
+
+struct ContentView: View {
+    
+    @State private var showWebView = false
+    private let urlString: String = "https://humbach.de"
+    
+    var body: some View {
+        WebView(url: URL(string: urlString)!)
+    }
+}
+
+struct WebView: UIViewRepresentable{
+    var url: URL
+    
+    func makeUIView(context: Context) -> WKWebView {
+        return WKWebView()
+    }
+    
+    func updateUIView(_ webView: WKWebView, context: Context) {
+        let request = URLRequest(url: url)
+        webView.load(request)
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
